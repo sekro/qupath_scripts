@@ -19,6 +19,14 @@ def annotations = hierarchy.getAnnotationObjects()
 
 // define annotation name to select as "borders" for cell finding
 def find_cells_in_PathClass = 'tissue'
+
+// remove child objects of this class so that they do not get deleted
+annotations.each {
+    if (it.getPathClass().toString() != find_cells_in_PathClass) {
+        hierarchy.removeObject(it, false)
+    }
+}
+
 String cellDetectionArgString =String.format(
         '{"detectionImageBrightfield": "Hematoxylin OD", ' +
                 '"requestedPixelSizeMicrons": 0.5, ' +
@@ -42,4 +50,11 @@ annotations.each {
         QPEx.runPlugin('qupath.imagej.detect.cells.WatershedCellDetection', cellDetectionArgString)
     }
 }
- print 'Done!'
+
+// and put the child objects back -> cells get sorted into those objects!
+annotations.each {
+    if (it.getPathClass().toString() != find_cells_in_PathClass) {
+        hierarchy.insertPathObject(hierarchy.getRootObject(), it, true, false)
+    }
+}
+print 'Done!'
