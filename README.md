@@ -16,7 +16,7 @@ watershed_cell_detection.groovy
 
 ## Exporter for st_toolbox
 
-Tested with QuPath 0.2.3 - no external dependencies
+Tested with QuPath 0.2.3 & 0.3.2 - no external dependencies
 
 export_for_st_toolbox.groovy
 
