@@ -24,7 +24,7 @@ st_toolbox: https://github.com/sekro/spatial_transcriptomics_toolbox
 
 ## Annotation import from other QP project 
 
-Tested with QuPath 0.2.3 - no external dependencies
+Tested with QuPath 0.2.3 & 0.3.2 - no external dependencies
 
 import_annotations_from_qpproj.groovy
 
