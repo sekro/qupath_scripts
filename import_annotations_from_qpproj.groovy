@@ -73,19 +73,24 @@ for (currentImg in sourceImages) {
             def targetH= targetImgD.getHierarchy()
             // read source Hierarchy from file
             def fileData = Paths.get(dirDataSource.getAbsolutePath(), currentImg.get("entryID").toString(), 'data.qpdata').toFile()
-            def sourceH = PathIO.readHierarchy(fileData)
-            def sourceAnnotations = sourceH.getAnnotationObjects()
-            // change names of annotations and add to target
-            sourceAnnotations.each {
-                it.setName(newAnnotationsName)
-                targetH.addPathObject(it)
-            }
-            // save the target
-            it.saveImageData(targetImgD)
-            print String.format("Done importing %s", currentName)
-            targetFound = true
-            counter += 1
-            return true
+            if (fileData.exists()) {
+                def sourceH = PathIO.readHierarchy(fileData)
+                def sourceAnnotations = sourceH.getAnnotationObjects()
+                // change names of annotations and add to target
+                sourceAnnotations.each {
+                    it.setName(newAnnotationsName)
+                    targetH.addPathObject(it)
+                }
+                // save the target
+                it.saveImageData(targetImgD)
+                print String.format("Done importing %s", currentName)
+                targetFound = true
+                counter += 1
+                return true
+            } else {
+                print String.format("No source data found for %s", currentName)
+                return false
+            }            
         }
         return false
     }
