@@ -1,6 +1,6 @@
 /**
  * Segment images with multiple scanns into seperate images
- * test with QuPath version 0.2.3
+ * test with QuPath version 0.3.2
  * @author Sebastian Krossa
  * NTNU Trondheim, Norway
  * June 2022
